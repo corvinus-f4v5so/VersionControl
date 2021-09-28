@@ -30,9 +30,9 @@ namespace UserMaintenance
         private void InitializeComponent()
         {
             this.listUserNames = new System.Windows.Forms.ListBox();
-            this.labelLastName = new System.Windows.Forms.Label();
+            this.labelFullName = new System.Windows.Forms.Label();
             this.labelFirstName = new System.Windows.Forms.Label();
-            this.textLastName = new System.Windows.Forms.TextBox();
+            this.textFullName = new System.Windows.Forms.TextBox();
             this.textFirstName = new System.Windows.Forms.TextBox();
             this.buttonAddName = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,14 +46,14 @@ namespace UserMaintenance
             this.listUserNames.Size = new System.Drawing.Size(170, 228);
             this.listUserNames.TabIndex = 0;
             // 
-            // labelLastName
+            // labelFullName
             // 
-            this.labelLastName.AutoSize = true;
-            this.labelLastName.Location = new System.Drawing.Point(193, 12);
-            this.labelLastName.Name = "labelLastName";
-            this.labelLastName.Size = new System.Drawing.Size(46, 17);
-            this.labelLastName.TabIndex = 1;
-            this.labelLastName.Text = "label1";
+            this.labelFullName.AutoSize = true;
+            this.labelFullName.Location = new System.Drawing.Point(193, 12);
+            this.labelFullName.Name = "labelFullName";
+            this.labelFullName.Size = new System.Drawing.Size(46, 17);
+            this.labelFullName.TabIndex = 1;
+            this.labelFullName.Text = "label1";
             // 
             // labelFirstName
             // 
@@ -64,12 +64,12 @@ namespace UserMaintenance
             this.labelFirstName.TabIndex = 2;
             this.labelFirstName.Text = "label2";
             // 
-            // textLastName
+            // textFullName
             // 
-            this.textLastName.Location = new System.Drawing.Point(245, 12);
-            this.textLastName.Name = "textLastName";
-            this.textLastName.Size = new System.Drawing.Size(140, 22);
-            this.textLastName.TabIndex = 3;
+            this.textFullName.Location = new System.Drawing.Point(245, 12);
+            this.textFullName.Name = "textFullName";
+            this.textFullName.Size = new System.Drawing.Size(140, 22);
+            this.textFullName.TabIndex = 3;
             // 
             // textFirstName
             // 
@@ -95,9 +95,9 @@ namespace UserMaintenance
             this.ClientSize = new System.Drawing.Size(399, 252);
             this.Controls.Add(this.buttonAddName);
             this.Controls.Add(this.textFirstName);
-            this.Controls.Add(this.textLastName);
+            this.Controls.Add(this.textFullName);
             this.Controls.Add(this.labelFirstName);
-            this.Controls.Add(this.labelLastName);
+            this.Controls.Add(this.labelFullName);
             this.Controls.Add(this.listUserNames);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -109,9 +109,9 @@ namespace UserMaintenance
         #endregion
 
         private System.Windows.Forms.ListBox listUserNames;
-        private System.Windows.Forms.Label labelLastName;
+        private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Label labelFirstName;
-        private System.Windows.Forms.TextBox textLastName;
+        private System.Windows.Forms.TextBox textFullName;
         private System.Windows.Forms.TextBox textFirstName;
         private System.Windows.Forms.Button buttonAddName;
     }
