@@ -122,6 +122,8 @@
   </data>
   <data name="FullName" xml:space="preserve">
     <value>Teljes név</value>
-    <comment>Veze</comment>
+  </data>
+  <data name="toFile" xml:space="preserve">
+    <value>Fájlba írás</value>
   </data>
 </root>
