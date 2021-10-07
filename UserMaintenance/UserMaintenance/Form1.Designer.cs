@@ -34,6 +34,7 @@ namespace UserMaintenance
             this.textFullName = new System.Windows.Forms.TextBox();
             this.buttonAddName = new System.Windows.Forms.Button();
             this.buttonWriteToFile = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUserNames
@@ -81,11 +82,22 @@ namespace UserMaintenance
             this.buttonWriteToFile.UseVisualStyleBackColor = true;
             this.buttonWriteToFile.Click += new System.EventHandler(this.buttonWriteToFile_Click);
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(193, 148);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(234, 28);
+            this.buttonDelete.TabIndex = 7;
+            this.buttonDelete.Text = "button1";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 252);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonWriteToFile);
             this.Controls.Add(this.buttonAddName);
             this.Controls.Add(this.textFullName);
@@ -105,6 +117,7 @@ namespace UserMaintenance
         private System.Windows.Forms.TextBox textFullName;
         private System.Windows.Forms.Button buttonAddName;
         private System.Windows.Forms.Button buttonWriteToFile;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 
