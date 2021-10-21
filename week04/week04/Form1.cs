@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace week04
         List<Tick> Ticks;
 
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek = new List<decimal>();
 
         public Form1()
         {
@@ -25,7 +27,6 @@ namespace week04
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
 
-            List<decimal> Nyereségek = new List<decimal>();
             int intervallum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -70,6 +71,44 @@ namespace week04
             }
 
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var nyereségekRendezve = (from x in Nyereségek
+                                          orderby x
+                                          select x).ToList();
+
+                SaveFileDialog sf = new SaveFileDialog();
+                //If you want a txt file instead csv, change "csv" to "txt" in next line
+                //or save it as txt instead of csv
+                sf.DefaultExt = "csv";
+                sf.FileName = "nyeresegLista";
+                sf.InitialDirectory = "C:/";
+                if (sf.ShowDialog() != DialogResult.OK) return;
+
+                using (StreamWriter sw = new StreamWriter(sf.FileName, false, Encoding.UTF8))
+                {
+                    sw.WriteLine("Időszak;Nyereség");
+                    for (int i = 0; i < nyereségekRendezve.Count(); i++)
+                    {
+                        sw.WriteLine(i + ";" + nyereségekRendezve[i]);
+                    }
+                }
+                MessageBox.Show("Mentés sikeres.");
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba történt  " + ex.Message);
+            }
+
+
+
+
         }
     }
 }
