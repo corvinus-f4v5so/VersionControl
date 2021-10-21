@@ -80,7 +80,7 @@ namespace Gyak04_F4V5SO
 
             for (int i = 0; i < headers.Length; i++)
             {
-                xlSheet.Cells[1, (i + 1)] = headers[0];
+                xlSheet.Cells[1, (i + 1)] = headers[i];
             }
 
             object[,] values = new object[Flats.Count, headers.Length];
@@ -106,7 +106,7 @@ namespace Gyak04_F4V5SO
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "=SUM("+GetCell(2,7)+":"+GetCell(counter,7)+")";
+                values[counter, 8] = "=(("+GetCell(counter+2,8)+ "*1000000)/" + GetCell(counter+2,7)+")";
                 counter++;
 
                 xlSheet.get_Range(
@@ -127,11 +127,11 @@ namespace Gyak04_F4V5SO
             Excel.Range valuesRange = xlSheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), headers.Length));
             valuesRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
-            Excel.Range firstColumnRange = xlSheet.get_Range(GetCell(2, 1), GetCell(values.GetLength(1), 1));            
+            Excel.Range firstColumnRange = xlSheet.get_Range(GetCell(2, 1), GetCell(values.GetLength(0)+1, 1));            
             firstColumnRange.Font.Bold = true;
             firstColumnRange.Interior.Color = Color.LightYellow;
 
-            Excel.Range lastColumnRange = xlSheet.get_Range(GetCell(2, headers.Length), GetCell(values.GetLength(0), headers.Length));
+            Excel.Range lastColumnRange = xlSheet.get_Range(GetCell(2, headers.Length), GetCell(values.GetLength(0)+1, headers.Length));
             lastColumnRange.Interior.Color = Color.LightGreen;
             lastColumnRange.NumberFormat = "#,##.00";
 
