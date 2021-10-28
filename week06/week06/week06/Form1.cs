@@ -17,24 +17,49 @@ namespace week06
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
+            string xmlCurrenciesResult = GetCurrencies();
+            FormatCurrenciesXml(xmlCurrenciesResult);
             RefreshData();
         }
 
         void RefreshData()
         {
             Rates.Clear();
-            string xmlResult = GetResult();
+            string xmlPriceResult = GetPriceData();
 
-            ratesDataGridView.DataSource = Rates;
-            FormatXml(xmlResult);
+            ratesDataGridView.DataSource = Rates;            
+            FormatPriceXml(xmlPriceResult);
             ShowChart();
         }
 
-        string GetResult()
+        string GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var requestCurr = new GetCurrenciesRequestBody();
+            var responseCurr = mnbService.GetCurrencies(requestCurr);
+            var resultCurr = responseCurr.GetCurrenciesResult;
+            return resultCurr;
+        }
+
+        void FormatCurrenciesXml(string xmlResult)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(xmlResult);
+
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                Currencies.Add(item.InnerText);
+            }
+            currencyPicker.DataSource = Currencies;
+        }
+
+        string GetPriceData()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -52,7 +77,7 @@ namespace week06
             return result;
         }
 
-        void FormatXml(string xmlResult)
+        void FormatPriceXml(string xmlResult)
         {
             XmlDocument xml = new XmlDocument();
             xml.LoadXml(xmlResult);
@@ -65,6 +90,8 @@ namespace week06
                 rd.Date = DateTime.Parse(item.GetAttribute("date"));
 
                 var childElement = (XmlElement)item.ChildNodes[0];
+                if (childElement == null)
+                    continue;
                 rd.Currency = childElement.GetAttribute("curr");
 
                 decimal unit = decimal.Parse(childElement.GetAttribute("unit"));
