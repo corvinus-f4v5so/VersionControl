@@ -16,6 +16,8 @@ namespace week06
         public Form1()
         {
             InitializeComponent();
+            function1();
+
         }
 
         void function1()
@@ -32,6 +34,9 @@ namespace week06
             var response = mnbService.GetExchangeRates(request);
 
             var result = response.GetExchangeRatesResult;
+
+            richTextBox1.AppendText(result);
+
         }
     }
 }
