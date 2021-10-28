@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using week06.Entities;
 using week06.MnbServiceReference;
@@ -24,6 +25,7 @@ namespace week06
             
             ratesDataGridView.DataSource = Rates;
             FormatXml(xmlResult);
+            ShowChart();
         }
 
         string GetResult()
@@ -34,7 +36,7 @@ namespace week06
             {
                 currencyNames = "EUR",
                 startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                endDate = "2020-10-25"
             };
 
             var response = mnbService.GetExchangeRates(request);
@@ -63,6 +65,25 @@ namespace week06
                 decimal innerText = decimal.Parse(childElement.InnerText);
                 rd.Value = (unit != 0) ? innerText / unit : innerText;
             }
+
+        }
+
+        void ShowChart()
+        {
+            chartRateData.DataSource = Rates;
+            var chartSeries = chartRateData.Series[0];
+            chartSeries.ChartType = SeriesChartType.Line;
+            chartSeries.XValueMember = "Date";
+            chartSeries.YValueMembers = "Value";
+            chartSeries.BorderWidth = 2;
+
+            var area = chartRateData.ChartAreas[0];
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
+            area.AxisY.IsStartedFromZero = false;
+
+            var legend = chartRateData.Legends[0];
+            legend.Enabled = false;
 
         }
     }
