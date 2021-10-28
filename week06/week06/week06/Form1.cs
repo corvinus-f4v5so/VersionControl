@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using week06.Entities;
 using week06.MnbServiceReference;
 
@@ -19,13 +20,13 @@ namespace week06
         public Form1()
         {
             InitializeComponent();
-            getResult();
-
+            string xmlResult = GetResult();
+            
             ratesDataGridView.DataSource = Rates;
-
+            FormatXml(xmlResult);
         }
 
-        void getResult()
+        string GetResult()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -40,6 +41,28 @@ namespace week06
 
             var result = response.GetExchangeRatesResult;
 
+            return result;
+        }
+
+        void FormatXml(string xmlResult)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(xmlResult);
+
+            foreach (XmlElement item in xml.DocumentElement)
+            {
+                var rd = new RateData();
+                Rates.Add(rd);
+
+                rd.Date = DateTime.Parse(item.GetAttribute("date"));
+
+                var childElement = (XmlElement)item.ChildNodes[0];
+                rd.Currency = childElement.GetAttribute("curr");
+
+                decimal unit = decimal.Parse(childElement.GetAttribute("unit"));
+                decimal innerText = decimal.Parse(childElement.InnerText);
+                rd.Value = (unit != 0) ? innerText / unit : innerText;
+            }
 
         }
     }
