@@ -35,12 +35,13 @@ namespace week06
             // 
             // ratesDataGridView
             // 
+            this.ratesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ratesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ratesDataGridView.Location = new System.Drawing.Point(12, 12);
             this.ratesDataGridView.Name = "ratesDataGridView";
             this.ratesDataGridView.RowHeadersWidth = 51;
             this.ratesDataGridView.RowTemplate.Height = 24;
-            this.ratesDataGridView.Size = new System.Drawing.Size(443, 442);
+            this.ratesDataGridView.Size = new System.Drawing.Size(392, 442);
             this.ratesDataGridView.TabIndex = 0;
             // 
             // Form1
