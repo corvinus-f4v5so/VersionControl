@@ -67,6 +67,15 @@ namespace week08
             Factory = new CarFactory();
         }
 
+        private void presentButton_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                RibbonColor = ribbonButton.BackColor,
+                BoxColor = boxButton.BackColor
+            };
+        }
+
         void DisplayNext()
         {
             if( _nextToy != null)
@@ -86,6 +95,26 @@ namespace week08
             var colorPicker = new ColorDialog();
 
             colorPicker.Color = ballColorButton.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = colorPicker.Color;
+        }
+
+        private void ribbonButton_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = ribbonButton.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = colorPicker.Color;
+        }
+
+        private void boxButton_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = boxButton.BackColor;
             if (colorPicker.ShowDialog() != DialogResult.OK) return;
             button.BackColor = colorPicker.Color;
         }

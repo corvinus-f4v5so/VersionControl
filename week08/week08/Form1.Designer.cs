@@ -37,6 +37,9 @@ namespace week08
             this.carButton = new System.Windows.Forms.Button();
             this.nextLabel = new System.Windows.Forms.Label();
             this.ballColorButton = new System.Windows.Forms.Button();
+            this.presentButton = new System.Windows.Forms.Button();
+            this.boxButton = new System.Windows.Forms.Button();
+            this.ribbonButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -82,7 +85,7 @@ namespace week08
             // 
             this.nextLabel.AutoSize = true;
             this.nextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.nextLabel.Location = new System.Drawing.Point(277, 12);
+            this.nextLabel.Location = new System.Drawing.Point(415, 12);
             this.nextLabel.Name = "nextLabel";
             this.nextLabel.Size = new System.Drawing.Size(107, 20);
             this.nextLabel.TabIndex = 3;
@@ -90,7 +93,7 @@ namespace week08
             // 
             // ballColorButton
             // 
-            this.ballColorButton.BackColor = System.Drawing.Color.Crimson;
+            this.ballColorButton.BackColor = System.Drawing.Color.Purple;
             this.ballColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ballColorButton.Location = new System.Drawing.Point(12, 67);
             this.ballColorButton.Name = "ballColorButton";
@@ -99,11 +102,46 @@ namespace week08
             this.ballColorButton.UseVisualStyleBackColor = false;
             this.ballColorButton.Click += new System.EventHandler(this.ballColorButton_Click);
             // 
+            // presentButton
+            // 
+            this.presentButton.Location = new System.Drawing.Point(281, 12);
+            this.presentButton.Name = "presentButton";
+            this.presentButton.Size = new System.Drawing.Size(116, 49);
+            this.presentButton.TabIndex = 5;
+            this.presentButton.Text = "PRESENT";
+            this.presentButton.UseVisualStyleBackColor = true;
+            this.presentButton.Click += new System.EventHandler(this.presentButton_Click);
+            // 
+            // boxButton
+            // 
+            this.boxButton.BackColor = System.Drawing.Color.DarkGreen;
+            this.boxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.boxButton.Location = new System.Drawing.Point(281, 122);
+            this.boxButton.Name = "boxButton";
+            this.boxButton.Size = new System.Drawing.Size(116, 49);
+            this.boxButton.TabIndex = 6;
+            this.boxButton.UseVisualStyleBackColor = false;
+            this.boxButton.Click += new System.EventHandler(this.boxButton_Click);
+            // 
+            // ribbonButton
+            // 
+            this.ribbonButton.BackColor = System.Drawing.Color.Red;
+            this.ribbonButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ribbonButton.Location = new System.Drawing.Point(281, 67);
+            this.ribbonButton.Name = "ribbonButton";
+            this.ribbonButton.Size = new System.Drawing.Size(116, 49);
+            this.ribbonButton.TabIndex = 7;
+            this.ribbonButton.UseVisualStyleBackColor = false;
+            this.ribbonButton.Click += new System.EventHandler(this.ribbonButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 526);
+            this.Controls.Add(this.ribbonButton);
+            this.Controls.Add(this.boxButton);
+            this.Controls.Add(this.presentButton);
             this.Controls.Add(this.ballColorButton);
             this.Controls.Add(this.nextLabel);
             this.Controls.Add(this.carButton);
@@ -125,6 +163,9 @@ namespace week08
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Label nextLabel;
         private System.Windows.Forms.Button ballColorButton;
+        private System.Windows.Forms.Button presentButton;
+        private System.Windows.Forms.Button boxButton;
+        private System.Windows.Forms.Button ribbonButton;
     }
 }
 
