@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using week08.Abstractions;
 using week08.Entities;
@@ -55,7 +56,10 @@ namespace week08
 
         private void ballButton_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory 
+            {
+                BallColor = ballColorButton.BackColor
+            };
         }
 
         private void carButton_Click(object sender, EventArgs e)
