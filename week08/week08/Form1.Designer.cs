@@ -121,7 +121,7 @@ namespace week08
             this.boxButton.Size = new System.Drawing.Size(116, 49);
             this.boxButton.TabIndex = 6;
             this.boxButton.UseVisualStyleBackColor = false;
-            this.boxButton.Click += new System.EventHandler(this.boxButton_Click);
+            this.boxButton.Click += new System.EventHandler(this.ballColorButton_Click);
             // 
             // ribbonButton
             // 
@@ -132,7 +132,7 @@ namespace week08
             this.ribbonButton.Size = new System.Drawing.Size(116, 49);
             this.ribbonButton.TabIndex = 7;
             this.ribbonButton.UseVisualStyleBackColor = false;
-            this.ribbonButton.Click += new System.EventHandler(this.ribbonButton_Click);
+            this.ribbonButton.Click += new System.EventHandler(this.ballColorButton_Click);
             // 
             // Form1
             // 

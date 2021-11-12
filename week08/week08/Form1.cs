@@ -101,22 +101,12 @@ namespace week08
 
         private void ribbonButton_Click(object sender, EventArgs e)
         {
-            var button = (Button)sender;
-            var colorPicker = new ColorDialog();
 
-            colorPicker.Color = ribbonButton.BackColor;
-            if (colorPicker.ShowDialog() != DialogResult.OK) return;
-            button.BackColor = colorPicker.Color;
         }
 
         private void boxButton_Click(object sender, EventArgs e)
         {
-            var button = (Button)sender;
-            var colorPicker = new ColorDialog();
 
-            colorPicker.Color = boxButton.BackColor;
-            if (colorPicker.ShowDialog() != DialogResult.OK) return;
-            button.BackColor = colorPicker.Color;
         }
     }
 }
