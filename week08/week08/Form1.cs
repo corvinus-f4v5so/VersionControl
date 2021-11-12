@@ -1,53 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using week08.Abstractions;
 using week08.Entities;
 
 namespace week08
 {
     public partial class Form1 : Form
     {
-        List<Toy> _balls = new List<Toy>();
-        public BallFactory Factory { 
-            get; 
-            set; 
+        Toy _nextToy;
+
+        List<Toy> _toys= new List<Toy>();
+
+        private IToyFactory _factory;
+        public IToyFactory Factory {
+            get { return _factory; }
+            set 
+            { 
+                _factory = value;
+                DisplayNext();
+            } 
         }
 
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
-            _balls.Add(ball);
-            ball.Left = -ball.Width;
-            mainPanel.Controls.Add(ball);
+            var toy = Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
-            var mostRightBall = 0;
-            foreach (var ball in _balls)
+            var mostRightToy = 0;
+            foreach (var toy in _toys)
             {
-                ball.MoveBall();
-                if (ball.Left > mostRightBall) mostRightBall = ball.Left;
+                toy.MoveToy();
+                if (toy.Left > mostRightToy) mostRightToy = toy.Left;
             }
 
-            if(mostRightBall > 1000)
+            if(mostRightToy > 1000)
             {
-                var oldestBall = _balls[0];
-                _balls.Remove(oldestBall);
-                mainPanel.Controls.Remove(oldestBall);
+                var oldestToy = _toys[0];
+                _toys.Remove(oldestToy);
+                mainPanel.Controls.Remove(oldestToy);
             }
+        }
+
+        private void ballButton_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void carButton_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        void DisplayNext()
+        {
+            if( _nextToy != null)
+            {
+                Controls.Remove(_nextToy);
+            }
+                _nextToy = Factory.CreateNew();
+                _nextToy.Top = nextLabel.Top;
+                _nextToy.Left = nextLabel.Left + nextLabel.Width + 20;
+                Controls.Add(_nextToy);
+            
+        }
+
+        private void ballColorButton_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = ballColorButton.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = colorPicker.Color;
         }
     }
 }
