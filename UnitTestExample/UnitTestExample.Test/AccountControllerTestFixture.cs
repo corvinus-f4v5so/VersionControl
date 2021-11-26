@@ -10,7 +10,13 @@ namespace UnitTestExample.Test
 {
     public class AccountControllerTestFixture
     {
-        [Test]
+        [
+            Test,
+            TestCase("jelszo123", false),
+            TestCase("bence@gmail", false),
+            TestCase("bencegmail.com", false),
+            TestCase("email@gmail.com", true),
+        ]
         public void TestValidateEamil(string email, bool expectedResult)
         {
             //Arrange
