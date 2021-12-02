@@ -10,6 +10,6 @@ namespace Microsimulation.Entities
     {
         public bool Gender { get; set; }
         public int Age { get; set; }
-        public double DeathProbability { get; set; }
+        public double DeathProb { get; set; }
     }
 }
