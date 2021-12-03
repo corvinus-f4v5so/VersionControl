@@ -17,19 +17,21 @@ namespace Microsimulation
         List<Person> Population = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        List<int> NumberOfMen = new List<int>();
+        List<int> NumberOfWomen = new List<int>();
 
         Random rnd = new Random(1234);
 
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Temp\nép.csv");
-            BirthProbabilities = GetBirthPorbability(@"C:\Temp\születés.csv");
-            DeathProbabilities = GetBDeathPorbability(@"C:\Temp\halál.csv");
+        }
 
-            dataGridView1.DataSource = Population;
+        private void Simulation(int endYear)
+        {
+            
 
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= endYear ; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
@@ -41,13 +43,26 @@ namespace Microsimulation
                                   select x).Count();
 
                 int nbrOfFemales = (from x in Population
-                                  where x.Gender == Gender.Female && x.IsAlive
-                                  select x).Count();
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
 
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+                NumberOfMen.Add(nbrOfMales);
+                NumberOfWomen.Add(nbrOfFemales);
+            }
+
+            DisplayResults(endYear);
+        }
+
+        private void DisplayResults(int endYear)
+        {
+            for (int year = 2005; year <= endYear; year++)
+            {
+                richTextBox1.Text += "Szimulációs év: " + year + "\n \t Fiúk: " + NumberOfMen[year-2005] + "\n \t Lányok: " + NumberOfWomen[year-2005] +"\n";
             }
         }
+
         public void SimStep(int year, Person person)
         {
             if (!person.IsAlive) return;
@@ -138,6 +153,28 @@ namespace Microsimulation
                 }
             }
             return deathProbabilities;
+        }
+
+        private void StartBtn_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            NumberOfMen.Clear();
+            NumberOfWomen.Clear();
+            Population.Clear();
+            BirthProbabilities.Clear();
+            DeathProbabilities.Clear();
+            Population = GetPopulation(FileTextBox.Text);
+            BirthProbabilities = GetBirthPorbability(@"C:\Temp\születés.csv");
+            DeathProbabilities = GetBDeathPorbability(@"C:\Temp\halál.csv");
+            Simulation(int.Parse(endYearNumericUpDown.Value.ToString()));
+        }
+
+        private void BrowseBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.InitialDirectory = @"C:\Temp";
+            if (of.ShowDialog() != DialogResult.OK) return;
+            FileTextBox.Text = of.FileName;
         }
     }
 }
