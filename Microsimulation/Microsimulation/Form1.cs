@@ -18,6 +18,8 @@ namespace Microsimulation
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        Random rnd = new Random(1234);
+
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +28,6 @@ namespace Microsimulation
             DeathProbabilities = GetBDeathPorbability(@"C:\Temp\halál.csv");
 
             dataGridView1.DataSource = BirthProbabilities;
-
         }
 
         public List<Person> GetPopulation(string csvpath)
