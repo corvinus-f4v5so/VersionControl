@@ -23,7 +23,7 @@ namespace Microsimulation
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Temp\nép-teszt.csv");
+            Population = GetPopulation(@"C:\Temp\nép.csv");
             BirthProbabilities = GetBirthPorbability(@"C:\Temp\születés.csv");
             DeathProbabilities = GetBDeathPorbability(@"C:\Temp\halál.csv");
 
@@ -33,7 +33,7 @@ namespace Microsimulation
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-
+                    SimStep(year, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -48,6 +48,34 @@ namespace Microsimulation
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
             }
         }
+        public void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
+
+            byte age = (byte)(year - person.BirthYear);
+
+            double pDeath = (from x in DeathProbabilities
+                             where x.Gender == person.Gender && x.Age == age
+                             select x.P).FirstOrDefault();
+
+            if (rnd.NextDouble() <= pDeath) person.IsAlive = false ;
+
+            if(person.IsAlive && person.Gender == Gender.Female)
+            {
+                double pBirth = (from x in BirthProbabilities
+                          where x.Age == age
+                          select x.P).FirstOrDefault();
+
+                if (rnd.NextDouble() <= pBirth)
+                {
+                    Person p = new Person();
+                    p.BirthYear = year;
+                    p.Gender = (Gender)(rnd.Next(1, 3));
+                    p.NbrOfChildren = 0;
+                    Population.Add(p);
+                }
+            }
+        }
 
         public List<Person> GetPopulation(string csvpath)
         {
@@ -60,7 +88,7 @@ namespace Microsimulation
                     var line = sr.ReadLine().Split(';');
                     population.Add(new Person()
                     {
-                        BirthYaer = int.Parse(line[0]),
+                        BirthYear = int.Parse(line[0]),
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
                         NbrOfChildren = int.Parse(line[2])
                     });
@@ -83,7 +111,7 @@ namespace Microsimulation
                     {
                         Age = int.Parse(line[0]),
                         NbrOfChildren = int.Parse(line[1]),
-                        BirthProb = double.Parse(line[2])
+                        P = double.Parse(line[2])
                     });
 
                 }
@@ -104,7 +132,7 @@ namespace Microsimulation
                     {
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
                         Age = int.Parse(line[1]),
-                        DeathProb = double.Parse(line[2])
+                        P = double.Parse(line[2])
                     });
 
                 }
