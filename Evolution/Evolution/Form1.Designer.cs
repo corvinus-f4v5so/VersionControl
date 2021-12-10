@@ -28,13 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.labelGen = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // labelGen
+            // 
+            this.labelGen.AutoSize = true;
+            this.labelGen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelGen.Location = new System.Drawing.Point(221, 9);
+            this.labelGen.Name = "labelGen";
+            this.labelGen.Size = new System.Drawing.Size(104, 20);
+            this.labelGen.TabIndex = 0;
+            this.labelGen.Text = "1. Generáció";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelGen);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label labelGen;
     }
 }
 
