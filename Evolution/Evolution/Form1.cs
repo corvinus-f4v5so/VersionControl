@@ -16,14 +16,26 @@ namespace Evolution
         GameController gc = new GameController();
         GameArea ga;
 
+        int populationSize = 100;
+        int nbrOfStesp = 10;
+        int nbrOfStespIncrement = 10;
+        int generation = 1;
+
+
+
+
         public Form1()
         {
             InitializeComponent();
 
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
-            gc.AddPlayer();
-            gc.Start(true);
+            for (int i = 0; i < populationSize; i++)
+            {
+                gc.AddPlayer(nbrOfStesp);
+            }
+            
+            gc.Start();
         }
     }
 }
