@@ -16,6 +16,8 @@ namespace Evolution
         GameController gc = new GameController();
         GameArea ga;
 
+        Brain winnerBrain = null;
+
         int populationSize = 100;
         int nbrOfStesp = 10;
         int nbrOfStespIncrement = 10;
@@ -51,6 +53,17 @@ namespace Evolution
                              select p;
 
             var topPerformers = playerList.Take(populationSize / 2).ToList();
+
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
 
             gc.ResetCurrentLevel();
             foreach (var p in topPerformers)
